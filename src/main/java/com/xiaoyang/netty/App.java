@@ -1,12 +1,17 @@
 package com.xiaoyang.netty;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 /**
  * Hello world!
  *
  */
+@DisplayName("netty test")
 public class App {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+
+    @Test
+    void test(){
+        System.out.println("ssssssssssssss");
     }
 }
