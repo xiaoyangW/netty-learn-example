@@ -18,7 +18,7 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
  * @author WXY
  * @date 2018/8/31 16:58
  */
-public class Echoserver {
+public class EchoServer {
     /**
      * 获取系统配置
      */

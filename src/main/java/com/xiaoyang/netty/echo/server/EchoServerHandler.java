@@ -1,5 +1,6 @@
 package com.xiaoyang.netty.echo.server;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -7,7 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @author WXY
  * @date 2018/8/31 17:24
  */
-
+@ChannelHandler.Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
