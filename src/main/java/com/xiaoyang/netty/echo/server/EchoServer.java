@@ -50,7 +50,6 @@ public class EchoServer {
                             if (sslContext != null) {
                                 p.addLast(sslContext.newHandler(ch.alloc()));
                             }
-                            //p.addLast(new LoggingHandler(LogLevel.INFO));
                             p.addLast(serverHandler);
                         }
                     });
