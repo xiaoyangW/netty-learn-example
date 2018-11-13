@@ -22,17 +22,8 @@ public class EchoServer {
     /**
      * 获取系统配置
      */
-    private static final Boolean SSL = System.getProperty("ssl") != null;
     private static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
     public static void main(String[] args) throws Exception {
-        //SSL配置
-        final SslContext sslContext;
-        if (SSL) {
-            SelfSignedCertificate signedCertificate = new SelfSignedCertificate();
-            sslContext = SslContextBuilder.forServer(signedCertificate.certificate(), signedCertificate.privateKey()).build();
-        } else {
-            sslContext = null;
-        }
         // Configure the server.
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -41,26 +32,23 @@ public class EchoServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
+                    //选项
                     .option(ChannelOption.SO_BACKLOG, 100)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline p = ch.pipeline();
-                            if (sslContext != null) {
-                                p.addLast(sslContext.newHandler(ch.alloc()));
-                            }
                             p.addLast(serverHandler);
                         }
                     });
 
-            // Start the server.
+            // 绑定并开始接受传入的连接。
             ChannelFuture f = b.bind(PORT).sync();
 
             // Wait until the server socket is closed.
             f.channel().closeFuture().sync();
         } finally {
-            // Shut down all event loops to terminate all threads.
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

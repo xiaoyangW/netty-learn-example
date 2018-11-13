@@ -1,5 +1,6 @@
 package com.xiaoyang.netty.echo.server;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -14,7 +15,8 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         //默认丢弃服务
-        ctx.write(msg);
+        System.out.println("msg----" + msg);
+        System.out.println(((ByteBuf) msg).capacity());
     }
 
     @Override
