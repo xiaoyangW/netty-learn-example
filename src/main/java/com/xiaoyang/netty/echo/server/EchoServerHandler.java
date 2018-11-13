@@ -13,6 +13,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        //默认丢弃服务
         ctx.write(msg);
     }
 
@@ -23,7 +24,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        // Close the connection when an exception is raised.
+        //引发异常关闭连接
         cause.printStackTrace();
         ctx.close();
     }
