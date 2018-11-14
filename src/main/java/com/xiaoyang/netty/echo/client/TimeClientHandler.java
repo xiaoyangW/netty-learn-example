@@ -1,6 +1,7 @@
 package com.xiaoyang.netty.echo.client;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -10,7 +11,7 @@ import java.util.Date;
  * @author WXY
  * @date 2018/11/14 21:00
  */
-
+@ChannelHandler.Sharable
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override

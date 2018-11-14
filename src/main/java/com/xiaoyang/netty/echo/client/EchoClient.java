@@ -27,6 +27,7 @@ public class EchoClient {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
+                    .option(ChannelOption.SO_KEEPALIVE,true )
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
@@ -34,10 +35,8 @@ public class EchoClient {
                             p.addLast(new TimeClientHandler());
                         }
                     });
-            bootstrap.connect(HOST, PORT).sync();
-
-            //cf.channel().closeFuture().sync();
-
+            ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
+            channelFuture.channel().closeFuture();
         } finally {
             group.shutdownGracefully();
         }
