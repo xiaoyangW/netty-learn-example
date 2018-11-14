@@ -31,7 +31,7 @@ public class EchoClient {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline p = ch.pipeline();
-                            p.addLast(new EchoClientHandler());
+                            p.addLast(new TimeClientHandler());
                         }
                     });
             bootstrap.connect(HOST, PORT).sync();
